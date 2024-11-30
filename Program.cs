@@ -1,5 +1,7 @@
 using AuctionsAPI.Configurations;
 using AuctionsAPI.Data;
+using AuctionsAPI.IRepository;
+using AuctionsAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,19 +12,26 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"))
 );
 
 builder.Services.AddCors(o =>
-{
+
     o.AddPolicy("AllowAll", builder =>
     {
         builder.AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyHeader(); });
+        .AllowAnyHeader();
+    })
+
+    );
 
 builder.Services.AddAutoMapper(typeof(MapperInitilizer));
+builder.Services.AddTransient<IUnitofWork, UnitofWork>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers().AddNewtonsoftJson(op => op.SerializerSettings.ReferenceLoopHandling =
+Newtonsoft.Json.ReferenceLoopHandling.Ignore
 
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
