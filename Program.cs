@@ -1,3 +1,4 @@
+using AuctionsAPI.Configurations;
 using AuctionsAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,15 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"))
 );
 
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader(); });
+
+builder.Services.AddAutoMapper(typeof(MapperInitilizer));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
