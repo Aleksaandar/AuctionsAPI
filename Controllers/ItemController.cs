@@ -39,7 +39,7 @@ namespace AuctionsAPI.Controllers
             }
         }
 
-        [HttpGet("{id:int}", Name ="GetItem")]
+        [HttpGet("{id:int}", Name = "GetItem")]
         public async Task<IActionResult> getItem(int id)
         {
             try
@@ -70,13 +70,43 @@ namespace AuctionsAPI.Controllers
                 await _unitOfWork.Items.Insert(item);
                 await _unitOfWork.Save();
 
-                return CreatedAtRoute("GetItem", new { id = item.Id },item);
+                return CreatedAtRoute("GetItem", new { id = item.Id }, item);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Something went wrong in the {nameof(CreateItem)}");
                 return StatusCode(500, "Internal server Error. Please try again later.");
 
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            if (id < 1)
+            {
+                _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteItem)}");
+                return BadRequest();
+            }
+
+            try
+            {
+                var item = await _unitOfWork.Items.Get(q => q.Id == id);
+                if (item == null)
+                {
+                    _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteItem)}");
+                    return BadRequest("Submitted data is invalid");
+                }
+                await _unitOfWork.Items.Delete(id);
+                await _unitOfWork.Save();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in {nameof(DeleteItem)}");
+                return StatusCode(500, "Internal server error. Please try again later.");
+               
             }
         }
     }

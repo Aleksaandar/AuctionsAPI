@@ -78,6 +78,36 @@ namespace AuctionsAPI.Controllers
 
             }
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteAuction(int id)
+        {
+            if (id < 1)
+            {
+                _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteAuction)}");
+                return BadRequest();
+            }
+
+            try
+            {
+                var auction = await _unitOfWork.Auctions.Get(q => q.Id == id);
+                if (auction == null)
+                {
+                    _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteAuction)}");
+                    return BadRequest("Submitted data is invalid");
+                }
+                await _unitOfWork.Auctions.Delete(id);
+                await _unitOfWork.Save();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in {nameof(DeleteAuction)}");
+                return StatusCode(500, "Internal server error. Please try again later.");
+
+            }
+        }
     }
 
 

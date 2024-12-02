@@ -26,6 +26,7 @@ namespace AuctionsAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
+
                 });
 
             migrationBuilder.CreateTable(
