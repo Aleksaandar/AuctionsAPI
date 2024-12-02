@@ -1,4 +1,5 @@
-﻿using AuctionsAPI.IRepository;
+﻿using AuctionsAPI.Data;
+using AuctionsAPI.IRepository;
 using AuctionsAPI.Models;
 using AuctionsAPI.Repository;
 using AutoMapper;
@@ -37,7 +38,7 @@ namespace AuctionsAPI.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name ="GetAuction")]
         public async Task<IActionResult> getAuction(int id)
         {
             try
@@ -50,6 +51,31 @@ namespace AuctionsAPI.Controllers
             {
                 _logger.LogError(ex, $"Something went wrong in the {nameof(getAuction)}");
                 return StatusCode(500, "Internal server Error. Please try again later.");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAuction([FromBody] CreateAuctionDTO auctionDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in {nameof(CreateAuction)}");
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var auction = _mapper.Map<Auction>(auctionDTO);
+                await _unitOfWork.Auctions.Insert(auction);
+                await _unitOfWork.Save();
+
+                return CreatedAtRoute("GetAuction", new { id = auction.Id }, auction);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in the {nameof(CreateAuction)}");
+                return StatusCode(500, "Internal server Error. Please try again later.");
+
             }
         }
     }

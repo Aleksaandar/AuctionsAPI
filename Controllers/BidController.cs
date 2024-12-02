@@ -1,4 +1,5 @@
-﻿using AuctionsAPI.IRepository;
+﻿using AuctionsAPI.Data;
+using AuctionsAPI.IRepository;
 using AuctionsAPI.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -37,12 +38,12 @@ namespace AuctionsAPI.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetBid")]
         public async Task<IActionResult> getBid(int id)
         {
             try
             {
-                var bid = await _unitOfWork.Bids.Get(q => q.Id == id, new List<string> { "Auction"});
+                var bid = await _unitOfWork.Bids.Get(q => q.Id == id, new List<string> { "Auction" });
                 var result = _mapper.Map<BidDTO>(bid);
                 return Ok(result);
             }
@@ -50,6 +51,33 @@ namespace AuctionsAPI.Controllers
             {
                 _logger.LogError(ex, $"Something went wrong in the {nameof(getBid)}");
                 return StatusCode(500, "Internal server Error. Please try again later.");
+            }
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> CreateBid([FromBody] CreateBidDTO bidDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in {nameof(CreateBid)}");
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var bid = _mapper.Map<Bid>(bidDTO);
+                await _unitOfWork.Bids.Insert(bid);
+                await _unitOfWork.Save();
+
+                return CreatedAtRoute("GetBid", new { id = bid.Id }, bid);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in the {nameof(CreateBid)}");
+                return StatusCode(500, "Internal server Error. Please try again later.");
+
+
             }
         }
     }

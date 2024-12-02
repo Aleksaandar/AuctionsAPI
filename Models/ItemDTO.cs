@@ -16,7 +16,7 @@ namespace AuctionsAPI.Models
 
         [Required]
         public double Pocetna_cena { get; set; }
-
+        [Required]
         public double Trenutna_cena { get; set; }
 
         [Required]

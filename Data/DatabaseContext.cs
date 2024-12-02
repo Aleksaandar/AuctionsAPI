@@ -6,13 +6,16 @@ namespace AuctionsAPI.Data
     {
         public DatabaseContext(DbContextOptions options) : base(options)
         { }
-      
+
         public DbSet<Item> Items { get; set; }
         public DbSet<Bid> Bids { get; set; }
         public DbSet<Auction> Auctions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Bid>()
+                  .ToTable(tb => tb.HasTrigger("trg_UpdateBrojLicitacija"));
+
             modelBuilder.Entity<Item>().HasData(
                 new Item
                 {
@@ -71,6 +74,7 @@ namespace AuctionsAPI.Data
                     Broj_licitacija = 0,
                 }
                 );
+
         }
     }
 }
