@@ -20,6 +20,13 @@ namespace AuctionsAPI.Models
         
         public int ItemId { get; set; }
     }
+
+    public class UpdateAuctionDTO 
+    {
+        [Required]
+
+        public DateTime? Vreme_zavrsetka { get; set; }
+    }
     public class AuctionDTO:CreateAuctionDTO
     {
         public int Id { get; set; }

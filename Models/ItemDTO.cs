@@ -23,6 +23,10 @@ namespace AuctionsAPI.Models
         public string Kategorija { get; set; }
 
     }
+    public class UpdateItemDTO : CreateItemDTO
+    {
+
+    }
     public class ItemDTO:CreateItemDTO
     {
         public int Id { get; set; }

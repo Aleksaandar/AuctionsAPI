@@ -108,6 +108,37 @@ namespace AuctionsAPI.Controllers
 
             }
         }
+
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> UpdateAuction(int id, [FromBody] UpdateAuctionDTO auctionDTO)
+        {
+            if (!ModelState.IsValid || id < 1)
+            {
+                _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateAuction)}");
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var auction = await _unitOfWork.Auctions.Get(q => q.Id == id);
+                if (auction == null)
+                {
+                    _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateAuction)}");
+                    return BadRequest("Submitted data is invalid.");
+                }
+                _mapper.Map(auctionDTO, auction);
+                _unitOfWork.Auctions.Update(auction);
+                await _unitOfWork.Save();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, $"Something went wrong in {nameof(UpdateAuction)}");
+                return StatusCode(500, "Internal server error. Please try again later.");
+            }
+        }
     }
 
 

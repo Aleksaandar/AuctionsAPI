@@ -12,6 +12,7 @@ namespace AuctionsAPI.Configurations
             CreateMap<Item,CreateItemDTO>().ReverseMap();
             CreateMap<Auction,AuctionDTO>().ReverseMap();
             CreateMap<Auction,CreateAuctionDTO>().ReverseMap();
+            CreateMap<Auction, UpdateAuctionDTO>().ReverseMap();
             CreateMap<Bid,BidDTO>().ReverseMap();
             CreateMap<Bid,CreateBidDTO>().ReverseMap();
         }
