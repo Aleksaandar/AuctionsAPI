@@ -1,4 +1,5 @@
 ﻿using AuctionsAPI.Data;
+using AuctionsAPI.Helpers;
 using AuctionsAPI.IRepository;
 using AuctionsAPI.Models;
 using AutoMapper;
@@ -15,12 +16,17 @@ namespace AuctionsAPI.Controllers
         private readonly IUnitofWork _unitOfWork;
         private readonly ILogger<ItemController> _logger;
         private readonly IMapper _mapper;
+        private readonly IFileStorageService fileStorageService;
+        private readonly string containerName = "itemsPictures";
 
-        public ItemController(IUnitofWork unitOfWork, ILogger<ItemController> logger, IMapper mapper)
+        public ItemController(IUnitofWork unitOfWork, ILogger<ItemController> logger, IMapper mapper,
+            IFileStorageService fileStorageService)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
             _mapper = mapper;
+            this.fileStorageService = fileStorageService;
+
         }
 
         [HttpGet]
@@ -56,7 +62,7 @@ namespace AuctionsAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateItem([FromBody] CreateItemDTO itemDTO)
+        public async Task<IActionResult> CreateItem([FromForm] CreateItemDTO itemDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -67,6 +73,10 @@ namespace AuctionsAPI.Controllers
             try
             {
                 var item = _mapper.Map<Item>(itemDTO);
+                if (itemDTO.Picture != null)
+                {
+                    item.Picture = await this.fileStorageService.SaveFile(containerName, itemDTO.Picture);
+                }
                 await _unitOfWork.Items.Insert(item);
                 await _unitOfWork.Save();
 
@@ -99,6 +109,7 @@ namespace AuctionsAPI.Controllers
                 }
                 await _unitOfWork.Items.Delete(id);
                 await _unitOfWork.Save();
+                await fileStorageService.DeleteFile(item.Picture, containerName);
 
                 return NoContent();
             }
@@ -106,29 +117,33 @@ namespace AuctionsAPI.Controllers
             {
                 _logger.LogError(ex, $"Something went wrong in {nameof(DeleteItem)}");
                 return StatusCode(500, "Internal server error. Please try again later.");
-               
+
             }
         }
 
 
-        [HttpPut ("{id:int}")]
+        [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdateItem(int id,[FromBody] UpdateItemDTO itemDTO)
+        public async Task<IActionResult> UpdateItem(int id, [FromForm] UpdateItemDTO itemDTO)
         {
-            if(!ModelState.IsValid || id<1)
+            if (!ModelState.IsValid || id < 1)
             {
                 _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateItem)}");
                 return BadRequest(ModelState);
             }
             try
             {
-                var item= await _unitOfWork.Items.Get(q => q.Id == id);
+                var item = await _unitOfWork.Items.Get(q => q.Id == id);
                 if (item == null)
                 {
                     _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateItem)}");
                     return BadRequest("Submitted data is invalid.");
                 }
                 _mapper.Map(itemDTO, item);
+                if (itemDTO.Picture != null)
+                {
+                    item.Picture = await fileStorageService.EditFile(containerName, itemDTO.Picture,item.Picture);
+                }
                 _unitOfWork.Items.Update(item);
                 await _unitOfWork.Save();
 

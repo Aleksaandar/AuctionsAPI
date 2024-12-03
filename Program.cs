@@ -1,5 +1,6 @@
 using AuctionsAPI.Configurations;
 using AuctionsAPI.Data;
+using AuctionsAPI.Helpers;
 using AuctionsAPI.IRepository;
 using AuctionsAPI.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,8 @@ builder.Services.AddCors(o =>
 
 builder.Services.AddAutoMapper(typeof(MapperInitilizer));
 builder.Services.AddTransient<IUnitofWork, UnitofWork>();
+builder.Services.AddScoped<IFileStorageService,InAppStorageService>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -42,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

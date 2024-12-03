@@ -24,7 +24,8 @@ namespace AuctionsAPI.Data
                     Opis = "Kompjuterska igrica",
                     Pocetna_cena = 130,
                     Trenutna_cena = 180,
-                    Kategorija = "Kompjuterske Igrice i Filmovi"
+                    Kategorija = "Kompjuterske Igrice i Filmovi",
+                    Picture= "https://spacenetgameshop.net/image/cache/data/001%20PS4%20Cover/assassins-creed-black-flag-546x840.jpg"
                 },
                new Item
                {
@@ -33,7 +34,8 @@ namespace AuctionsAPI.Data
                    Opis = "Tastatura za kucanje",
                    Pocetna_cena = 60,
                    Trenutna_cena = 88,
-                   Kategorija = "Tehnika"
+                   Kategorija = "Tehnika",
+                   Picture= "https://www.kancelarijskimaterijal-bg.rs/images/products/big/398.jpg"
 
                },
                 new Item
@@ -43,7 +45,8 @@ namespace AuctionsAPI.Data
                     Opis = "lopta za igranje kosarke",
                     Pocetna_cena = 50,
                     Trenutna_cena = 75,
-                    Kategorija = "Sport"
+                    Kategorija = "Sport",
+                    Picture= "https://trendcoo.rs/wp-content/uploads/2023/08/77-101z-1.jpg"
                 }
                 );
             modelBuilder.Entity<Auction>().HasData(

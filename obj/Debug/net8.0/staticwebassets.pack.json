@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\itemsPictures\\a630b57d-eb43-45d0-b590-f5876d2b3e7c.png",
+      "PackagePath": "staticwebassets\\itemsPictures\\a630b57d-eb43-45d0-b590-f5876d2b3e7c.png"
+    },
+    {
+      "Id": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\itemsPictures\\d6930b66-04a3-4bb4-a366-5ea04885cb39.png",
+      "PackagePath": "staticwebassets\\itemsPictures\\d6930b66-04a3-4bb4-a366-5ea04885cb39.png"
+    },
+    {
+      "Id": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\itemsPictures\\e8935eac-2430-48c2-912c-c66379808400.png",
+      "PackagePath": "staticwebassets\\itemsPictures\\e8935eac-2430-48c2-912c-c66379808400.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.AuctionsAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.AuctionsAPI.props",
+      "PackagePath": "build\\AuctionsAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.AuctionsAPI.props",
+      "PackagePath": "buildMultiTargeting\\AuctionsAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.AuctionsAPI.props",
+      "PackagePath": "buildTransitive\\AuctionsAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

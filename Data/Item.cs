@@ -13,6 +13,8 @@ namespace AuctionsAPI.Data
         public double Trenutna_cena { get; set; }
 
         public string Kategorija { get; set; }
+        
+        public string Picture { get; set; }
 
         
     }

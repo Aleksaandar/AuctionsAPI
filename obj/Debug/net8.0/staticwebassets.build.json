@@ -1,11 +1,77 @@
 {
   "Version": 1,
-  "Hash": "0XCqyLQ9ygF0powEVk3HbIybjei8K0ty0tXUs4yNqno=",
+  "Hash": "C2qzy1nblc8PvfWZtmFOC9uBtpqq/BCNmlSKqGf9RQ4=",
   "Source": "AuctionsAPI",
   "BasePath": "_content/AuctionsAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "AuctionsAPI\\wwwroot",
+      "Source": "AuctionsAPI",
+      "ContentRoot": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\",
+      "BasePath": "_content/AuctionsAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\itemsPictures\\a630b57d-eb43-45d0-b590-f5876d2b3e7c.png",
+      "SourceId": "AuctionsAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\",
+      "BasePath": "_content/AuctionsAPI",
+      "RelativePath": "itemsPictures/a630b57d-eb43-45d0-b590-f5876d2b3e7c.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\itemsPictures\\a630b57d-eb43-45d0-b590-f5876d2b3e7c.png"
+    },
+    {
+      "Identity": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\itemsPictures\\d6930b66-04a3-4bb4-a366-5ea04885cb39.png",
+      "SourceId": "AuctionsAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\",
+      "BasePath": "_content/AuctionsAPI",
+      "RelativePath": "itemsPictures/d6930b66-04a3-4bb4-a366-5ea04885cb39.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\itemsPictures\\d6930b66-04a3-4bb4-a366-5ea04885cb39.png"
+    },
+    {
+      "Identity": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\itemsPictures\\e8935eac-2430-48c2-912c-c66379808400.png",
+      "SourceId": "AuctionsAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hrckok\\source\\repos\\AuctionsAPI\\AuctionsAPI\\wwwroot\\",
+      "BasePath": "_content/AuctionsAPI",
+      "RelativePath": "itemsPictures/e8935eac-2430-48c2-912c-c66379808400.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\itemsPictures\\e8935eac-2430-48c2-912c-c66379808400.png"
+    }
+  ]
 }

@@ -22,6 +22,10 @@ namespace AuctionsAPI.Models
         [Required]
         public string Kategorija { get; set; }
 
+        [Required]
+        
+        public IFormFile Picture { get; set; }
+
     }
     public class UpdateItemDTO : CreateItemDTO
     {
@@ -30,8 +34,8 @@ namespace AuctionsAPI.Models
     public class ItemDTO:CreateItemDTO
     {
         public int Id { get; set; }
+        public string Picture { get; set; }
 
-        
 
     }
 }
